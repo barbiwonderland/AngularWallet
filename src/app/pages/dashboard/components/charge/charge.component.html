@@ -1,0 +1,25 @@
+<div class="main">
+  <form [formGroup]="form" (ngSubmit)="getCharge()">
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Monto</mat-label>
+      <input matInput type="number" class="example-right-align" placeholder="0" formControlName="amount">
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Concepto</mat-label>
+      <input matInput placeholder="Alimentos" formControlName="concept">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Moneda</mat-label>
+      <mat-select formControlName="currency">
+        <mat-option value="peso">Peso Argentino</mat-option>
+        <mat-option value="euro">Euro</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Agregar</button>
+  </form>
+</div>

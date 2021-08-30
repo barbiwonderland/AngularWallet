@@ -1,0 +1,14 @@
+.mat-body {
+    background-color: white !important;
+  }
+
+  .body{
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url("../../../assets/img/dashboard.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+   
+  }
+  .mat-typography {
+    margin: 0 !important; 
+  }

@@ -1,0 +1,30 @@
+.main {
+  display: flex;
+  vertical-align: middle;
+  margin: auto;
+  height: 100%;
+  align-items: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-raised-button {
+  display: flex;
+  margin: auto;
+}
+form {
+  background: rgb(236, 241, 236);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+  margin: auto;
+  height: 60vh;
+  width: 70%;
+  padding: 1%;
+  border-radius: 5px;
+}

@@ -1,0 +1,38 @@
+<div class="body">
+    <!-- <mat-spinner  class="center"></mat-spinner> -->
+    <div class="login" >
+      <img width="20%" src="../../assets//img/user.svg" alt="">
+      <h1>Registarme</h1>
+      <form [formGroup]="form" (ngSubmit)="getUser()" >
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput  ="name" formControlName="name">
+            <mat-error>Campos no validos</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="surname" >
+            <mat-error>Campos no validos</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput  ="email" formControlName="email">
+            <mat-error>Campos no validos</mat-error>
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="user" >
+          <mat-error>Campos no validos</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input  type="password"  matInput formControlName="password">
+          <mat-error>Campos no validos</mat-error>
+        </mat-form-field>
+        <br>
+
+        <button class="button" type="submit" mat-raised-button color="primary">Registrarse</button>
+      </form>
+    </div>
+  </div>
+  

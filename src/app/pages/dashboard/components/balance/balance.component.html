@@ -1,0 +1,26 @@
+<div class="main">
+  <div class="body text-center" style="color: rgb(238, 242, 245);">
+
+    <div class="welcome">
+      <h1>Hola <span class="text-capitalize">{{actualUser.name }}</span>, tu saldo en pesos es de
+        {{argAccount.balance | currency}}
+      </h1>
+    </div>
+    <div class="main-button">
+      <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
+        [routerLink]="['/dashboard/charge/add']">
+        Agregar Saldo
+      </button>
+      <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
+        [routerLink]="['/dashboard/charge/payment']">
+        Agregar gasto
+      </button>
+    </div>
+    <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
+      [routerLink]="['/dashboard/payment/exchange']">
+      Comprar Divisas
+    </button>
+
+  </div>
+
+</div>

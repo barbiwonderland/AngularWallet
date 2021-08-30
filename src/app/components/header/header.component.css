@@ -1,0 +1,22 @@
+.example-spacer {
+  margin: 0 auto;
+}
+.align-center {
+  align-items: center;
+  display: flex;
+}
+
+.y-margin {
+  margin: 0 5%;
+}
+.navbar {
+  margin-top: 0 !important;
+}
+
+.mat-toolbar {
+    opacity: 0.9;
+    background: rgb(29 28 30);
+    color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+}

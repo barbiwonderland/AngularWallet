@@ -1,0 +1,22 @@
+<div class="body">
+  <mat-spinner *ngIf="loading" class="center"></mat-spinner>
+  <div class="login" *ngIf="!loading">
+    <img width="40%" src="../../assets//img/user.svg" alt="">
+    <h1>Login</h1>
+    <form [formGroup]="form" (ngSubmit)="ingresar()">
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput width="80%" formControlName="usuario">
+        <mat-error>Campos no validos</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input width="80%" type="password" formControlName="password" matInput>
+        <mat-error>Campos no validos</mat-error>
+      </mat-form-field>
+      <br>
+      <p>¿Aun no tenes cuenta? <span style="color: blueviolet;" routerLink="/register">¡Registrate!</span></p>
+      <button [disabled]="form.invalid" class="button" type="submit" mat-raised-button color="primary">Ingresar</button>
+    </form>
+  </div>
+</div>

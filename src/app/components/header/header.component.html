@@ -1,0 +1,36 @@
+<div class="navbar">
+  <mat-toolbar position="end">
+    <div [routerLink]="['/dashboard']">Mi cuenta
+    </div>
+
+    <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon"
+      aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item [routerLink]="['/dashboard']">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/activity']">
+        <mat-icon>trending_up</mat-icon>
+        <span>Movimientos</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/transfer']">
+        <mat-icon>schedule_send</mat-icon>
+        <span>Transferencias</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/fixed-term']">
+        <mat-icon>savings</mat-icon>
+        <span>Plazo Fijo</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/login']">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+
+
+
+  </mat-toolbar>
+</div>
