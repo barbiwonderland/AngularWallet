@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '404', component: NotFoundComponent },
   {
     path: 'dashboard',
     loadChildren: () =>
@@ -16,7 +15,7 @@ const routes: Routes = [
         (x) => x.DashboardModule
       ),
   },
-  { path: '**', redirectTo: '/404' },
+
 ];
 
 @NgModule({

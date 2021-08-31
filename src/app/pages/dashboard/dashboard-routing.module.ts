@@ -8,6 +8,7 @@ import { UsersComponent } from 'src/app/components/users/users.component';
 import { FixedTermComponent } from './components/fixed-term/fixed-term.component';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { ForeignCurrencyComponent } from './components/foreign-currency/foreign-currency.component';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,8 @@ const routes: Routes = [
       { path: 'fixed-term', component: FixedTermComponent },
       { path: 'transfer', component: TransferComponent },
       { path: 'foreign-currency', component: ForeignCurrencyComponent },
+      { path: '404', component: NotFoundComponent },
+      { path: '**', redirectTo: '/404' },
     ],
   },
 ];
