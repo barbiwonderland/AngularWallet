@@ -9,7 +9,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Concepto</mat-label>
-      <input matInput placeholder="Alimentos" formControlName="concept">
+      <input matInput placeholder="Alimentos"  formControlName="concept">
     </mat-form-field>
 
 
@@ -17,7 +17,7 @@
       <mat-label>Moneda</mat-label>
       <mat-select formControlName="currency">
         <mat-option value="peso">Peso Argentino</mat-option>
-        <mat-option value="euro">Euro</mat-option>
+        <mat-option value="euro" [disabled]="send">Euro</mat-option>
       </mat-select>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Agregar</button>
