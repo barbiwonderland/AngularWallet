@@ -1,4 +1,3 @@
-import { User } from './../../../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,13 +22,13 @@ export class ChargeComponent implements OnInit {
   exchange: boolean = false;
   generalAccounts!: any;
   destinatary!: any;
+  localAccount!:any;
 
   constructor(
     private fb: FormBuilder,
     private store: Store<{ count: number }>,
     private router: Router,
-    private _snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private _snackBar: MatSnackBar
   ) {
     this.userId = this.userId ? JSON.parse(this.userId) : [];
     this.form = this.fb.group({
@@ -43,6 +42,7 @@ export class ChargeComponent implements OnInit {
 
   ngOnInit(): void {
     (() => {
+      // Verifica que tipo de acción es
       if (this.router.url.includes('add')) {
         this.add_ = true;
       } else if (this.router.url.includes('send')) {
@@ -58,6 +58,7 @@ export class ChargeComponent implements OnInit {
     console.log(this.send);
 
     this.count$ = this.store.select('count');
+    // Me trae todas las cuentas existentes
     this.generalAccounts = localStorage.getItem('accounts');
     this.generalAccounts = this.generalAccounts
       ? JSON.parse(this.generalAccounts)
@@ -68,7 +69,7 @@ export class ChargeComponent implements OnInit {
   getCharge() {
     console.log(this.form.value);
     // me traigo lo que hay en activity si no hay nada asigno []
-    let activity: any = [];
+    let activity: any ;
     activity = localStorage.getItem('activities');
     activity = activity ? JSON.parse(activity) : [];
     console.log(activity);
@@ -82,16 +83,14 @@ export class ChargeComponent implements OnInit {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Actualizo el saldo
     // Traigo el saldo del LS
-    let localAccount: any = [];
-    localAccount = localStorage.getItem('account');
-    localAccount = localAccount? JSON.parse(localAccount) : "";
-    console.log(localAccount.balance);
+    this.localAccount = JSON.parse(localStorage.getItem('account')!);
     console.log(this.form.value.amount);
     // Guardo el nuevo saldo
+    console.log(this.localAccount.balance - this.form.value.amount)
     let operation =
       this.payment || this.send
-        ? localAccount.balance - this.form.value.amount
-        : localAccount.balance + this.form.value.amount;
+        ? this.localAccount.balance - this.form.value.amount
+        : this.localAccount.balance + this.form.value.amount;
     let resumeAccount = {
       balance: operation,
       id: this.form.value.id,
@@ -113,7 +112,7 @@ export class ChargeComponent implements OnInit {
           : el
       );
     }
-    console.log(this.send)
+    console.log(this.send);
     console.log(updateArrayAccounts);
     // console.log(updateArrayAccounts);
     //modifico del localstorage

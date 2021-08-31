@@ -17,7 +17,6 @@ export class BalanceComponent implements OnInit {
     this.userId = id ? JSON.parse(id) : {};
     this.argAccount = (localStorage.getItem('account') );
     this.argAccount = JSON.parse(this.argAccount);
-     console.log(this.argAccount);
     //DATOS DEL USUARIO ACTUAL DESDE LS
     this.actualUser = localStorage.getItem('user');
     this.actualUser = this.actualUser ? JSON.parse(this.actualUser) : '';
