@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
   }
   getUser() {
     console.log(this.form.value);
+    // Agrego datos de usuario que se registra
     let userForm: any = {
       password: this.form.value.password,
       user: this.form.value.user,
@@ -44,6 +45,10 @@ export class RegisterComponent implements OnInit {
       surname: this.form.value.surname,
       id: Date.now(),
     };
+    let newArray = [...this.arrayUsers, userForm];
+    this.arrayUsers = newArray;
+    localStorage.setItem('user', JSON.stringify(newArray));
+    //Agrego Nuevos datos de cuenta
     let account: any = {
       id: userForm.id,
       balance: 0,
@@ -51,10 +56,6 @@ export class RegisterComponent implements OnInit {
       name: this.form.value.name,
     };
     console.log(account);
-    let newArray = [...this.arrayUsers, userForm];
-    this.arrayUsers = newArray;
-    localStorage.setItem('user', JSON.stringify(newArray));
-    //Nuevos datos de cuenta
     let newAccount = [...this.localAcounts, account];
     // Guardo el nuevo arreglo en localstorage
     localStorage.setItem('accounts', JSON.stringify(newAccount));
