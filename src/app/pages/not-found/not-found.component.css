@@ -1,0 +1,8 @@
+.main {
+  background:url("../../../assets/img/error-2.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: white;
+}
