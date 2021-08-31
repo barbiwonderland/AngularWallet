@@ -15,7 +15,6 @@ import { ReduxService } from 'src/app/services/redux.service';
 export class LoginComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup;
-  arrayUsers: any;
   localUser: any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -34,8 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.arrayUsers = localStorage.getItem('user');
-    this.arrayUsers = this.arrayUsers ? JSON.parse(this.arrayUsers) : [];
     this.localUser = localStorage.getItem('user');
     this.localUser = JSON.parse(this.localUser);
     console.log(this.localUser);
@@ -45,15 +42,16 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar() {
+    // Chequeo si el usuario ingresado existe
     let result = this.localUser.filter(
       (x: any) =>
-       x.user === this.form.value.usuario &&
+        x.user === this.form.value.usuario &&
         x.password === this.form.value.password
     );
     if (result.length) {
       console.log(result[0].user);
       localStorage.setItem('id', JSON.stringify(result[0].id));
-
+      // filtro la cuenta de ese usuario
       this.actualAccount = this.account.filter(
         (x: any) => x.user == result[0].user
       );
