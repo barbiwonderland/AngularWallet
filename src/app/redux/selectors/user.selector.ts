@@ -11,5 +11,5 @@
 
 // // export const getUser = createSelector(
 // //   getuserState,
-// //   (state: mainUsery.any) => state.name
+// //   (state: mainUser.any) => state
 // // );

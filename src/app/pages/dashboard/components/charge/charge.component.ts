@@ -1,10 +1,11 @@
+import { userService } from './../../../../services/user.service';
+import { ActivityService } from './../../../../services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { add, substract } from 'src/app/redux/actions/counter.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-charge',
@@ -22,13 +23,14 @@ export class ChargeComponent implements OnInit {
   exchange: boolean = false;
   generalAccounts!: any;
   destinatary!: any;
-  localAccount!:any;
+  localAccount!: any;
 
   constructor(
     private fb: FormBuilder,
     private store: Store<{ count: number }>,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private ActivityService: ActivityService,
+    private userService: userService
   ) {
     this.userId = this.userId ? JSON.parse(this.userId) : [];
     this.form = this.fb.group({
@@ -56,82 +58,31 @@ export class ChargeComponent implements OnInit {
     console.log(this.payment);
     console.log(this.add_);
     console.log(this.send);
-
-    this.count$ = this.store.select('count');
-    // Me trae todas las cuentas existentes
-    this.generalAccounts = localStorage.getItem('accounts');
-    this.generalAccounts = this.generalAccounts
-      ? JSON.parse(this.generalAccounts)
-      : [];
-    console.log(this.generalAccounts);
   }
-
   getCharge() {
-    console.log(this.form.value);
-    // me traigo lo que hay en activity si no hay nada asigno []
-    let activity: any ;
-    activity = localStorage.getItem('activities');
-    activity = activity ? JSON.parse(activity) : [];
-    console.log(activity);
-    //GUARDO NUEVO MOVIVIMIENTO
-    let newActivity = this.form.value;
-    // console.log("mov guardado",newActivity)
-    activity.push(newActivity);
-    console.log(activity, 'activity modificado');
-    // Actualizo nuevo arreglo en LS
-    localStorage.setItem('activities', JSON.stringify(activity));
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    // Actualizo el saldo
-    // Traigo el saldo del LS
-    this.localAccount = JSON.parse(localStorage.getItem('account')!);
-    console.log(this.form.value.amount);
-    // Guardo el nuevo saldo
-    console.log(this.localAccount.balance - this.form.value.amount)
+    let actualUser = this.userService.currentUser();
     let operation =
       this.payment || this.send
-        ? this.localAccount.balance - this.form.value.amount
-        : this.localAccount.balance + this.form.value.amount;
-    let resumeAccount = {
-      balance: operation,
-      id: this.form.value.id,
-    };
-    console.log(resumeAccount);
-
-    // Modifico el Array de todas las cuentas
-    let updateArrayAccounts = this.generalAccounts.map((el: any) =>
-      el.id === this.userId ? { ...el, balance: operation } : el
-    );
+        ? actualUser.accounts.pesos - this.form.value.amount
+        : actualUser.accounts.pesos + this.form.value.amount;
+    this.ActivityService.saveActivity(this.form.value);
+    this.ActivityService.updateBalance(operation);
+    ///////////////////////////////////////////////////////////////////////////////////////////////F
     // CONDICIONAL PARA TRANSFERENCIA
     this.destinatary = this.router.url;
     this.destinatary = this.destinatary.split(/\//)[3];
-    console.log(this.destinatary, 'destinatario');
-    if (this.send) {
-      updateArrayAccounts = updateArrayAccounts.map((el: any) =>
-        el.id === this.destinatary
-          ? { ...el, balance: el.balance + this.form.value.amount }
-          : el
-      );
-    }
-    console.log(this.send);
-    console.log(updateArrayAccounts);
-    // console.log(updateArrayAccounts);
-    //modifico del localstorage
-    localStorage.setItem('accounts', JSON.stringify(updateArrayAccounts));
-    // modificar el arreglo original
-    localStorage.setItem('account', JSON.stringify(resumeAccount));
+    this.send
+      ? this.ActivityService.sendMoney(
+          Number(this.destinatary),
+          this.form.value.amount
+        )
+      : null;
 
-    // localStorage.setItemH("accounts",JSON.stringify(newAccounts))
-    this._snackBar.open('Agregado con éxito', '', {
-      duration: 1500,
-    });
-    setTimeout(() => {
-      this.router.navigate(['/dashboard']);
-    }, 2000);
+    // add(n: number) {
+    //   this.store.dispatch(add({ num: n }));
+    // }
+    // substract(n: number) {
+    //   this.store.dispatch(substract({ num: n }));
+    // }
   }
-  // add(n: number) {
-  //   this.store.dispatch(add({ num: n }));
-  // }
-  // substract(n: number) {
-  //   this.store.dispatch(substract({ num: n }));
-  // }
 }

@@ -1,8 +1,8 @@
+import { dataUser } from './../redux/actions/user.actions';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { add, substract } from '../redux/actions/counter.action';
-import { update } from '../redux/actions/user.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class ReduxService {
     this.store.dispatch(substract({ num: n }));
   }
   update(user: any) {
-    this.store.dispatch(update({ user}));
+    this.store.dispatch(dataUser({ user}));
   }
 
 

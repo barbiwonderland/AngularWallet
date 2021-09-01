@@ -1,5 +1,5 @@
+import { dataUser } from './../actions/user.actions';
 import { createReducer, on } from '@ngrx/store';
-import { update } from '../actions/user.actions';
 export const initialState:Array<any> =[ {
   user: '',
   password: '',
@@ -11,7 +11,7 @@ export const initialState:Array<any> =[ {
 
 const _userReducer = createReducer(
   initialState,
-  on(update, (state, { user }) => user)
+  on(dataUser, (state, { user }) => user)
 );
 
 export function userReducer(state: any, action:any) {

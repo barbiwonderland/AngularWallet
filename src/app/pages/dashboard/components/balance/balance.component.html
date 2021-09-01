@@ -2,8 +2,8 @@
   <div class="body text-center" style="color: rgb(238, 242, 245);">
 
     <div class="welcome">
-      <h1>Hola <span class="text-capitalize">{{actualUser.name }}</span>, tu saldo en pesos es de
-        {{argAccount.balance | currency}}
+      <h1>Hola <span class="text-capitalize">{{actualUser.info.name  }}</span>, tu saldo en pesos es de
+        {{actualUser.accounts.pesos | currency}}
       </h1>
     </div>
     <div class="main-button">

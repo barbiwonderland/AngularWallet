@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 
 
-export const update = createAction(
+
+export const dataUser = createAction(
   '[Counter Component] Update',
   props<{ user: any }>()
 );

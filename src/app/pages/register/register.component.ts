@@ -1,3 +1,5 @@
+import { userService } from './../../services/user.service';
+import { ParseSourceSpan } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,10 +12,13 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup;
-  arrayUsers?: any;
-  localAcounts!: any;
+  listUsers?: any;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: userService
+  ) {
     this.form = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(3)]],
       user: ['', [Validators.required]],
@@ -24,40 +29,27 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Llamo al Ls, si hay algo, lo guardo en arrayUsers, si no, le asigno []
-    let localUser = localStorage.getItem('user');
-    this.arrayUsers = localUser ? JSON.parse(localUser) : [];
-    console.log(this.arrayUsers);
-    // Traigo todas las cuentas del local si no []
-    this.localAcounts = localStorage.getItem('accounts');
-    this.localAcounts = this.localAcounts ? JSON.parse(this.localAcounts) : [];
-    console.log(this.localAcounts);
+    this.listUsers = this.userService.getusers();
   }
   getUser() {
     console.log(this.form.value);
     // Agrego datos de usuario que se registra
     let userForm: any = {
-      password: this.form.value.password,
-      user: this.form.value.user,
-      email: this.form.value.email,
-      name: this.form.value.name,
-      surname: this.form.value.surname,
       id: Date.now(),
+      info: {
+        password: this.form.value.password,
+        user: this.form.value.user,
+        email: this.form.value.email,
+        name: this.form.value.name,
+        surname: this.form.value.surname,
+      },
+      accounts: {
+        pesos: 0,
+        dolar: 0,
+      },
     };
-    let newArray = [...this.arrayUsers, userForm];
-    this.arrayUsers = newArray;
+    let newArray = [...this.listUsers, userForm];
     localStorage.setItem('user', JSON.stringify(newArray));
-    //Agrego Nuevos datos de cuenta
-    let account: any = {
-      id: userForm.id,
-      balance: 0,
-      user: this.form.value.user,
-      name: this.form.value.name,
-    };
-    console.log(account);
-    let newAccount = [...this.localAcounts, account];
-    // Guardo el nuevo arreglo en localstorage
-    localStorage.setItem('accounts', JSON.stringify(newAccount));
     this.router.navigate(['/login']);
   }
 }

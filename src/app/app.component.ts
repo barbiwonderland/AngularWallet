@@ -15,21 +15,21 @@ import {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  currentItem = 'Television';
-  user: any;
-  user$?: Observable<any>;
-  constructor(private store: Store<{ user: any }>) {}
+  // currentItem = 'Television';
+  // user: any;
+  // user$!: Observable<any>;
+  // constructor(private store: Store<{ user: any }>) {}
   title = 'AngularWallet';
 
   ngOnInit(): void {
-    this.user$ = this.store.select('user');
-    console.log(this.store.select('user'));
-    this.user$.subscribe((data: any) => {
-      let [{ id: id }] = data;
-      // console.log(nameValue, id); //your data shows here
-      this.user = id;
-      // console.log(this.user);
-      localStorage.setItem("id",this.user)
-    });
+    // this.user$ = this.store.select('user');
+    // console.log(this.store.select('user'));
+    // this.user$.subscribe((data: any) => {
+    //   let [{ id: id }] = data;
+    //   // console.log(nameValue, id); //your data shows here
+    //   this.user = id;
+    //   // console.log(this.user);
+    //   localStorage.setItem("id",this.user)
+    // });
   }
 }
