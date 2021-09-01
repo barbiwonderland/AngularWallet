@@ -50,7 +50,7 @@ export class ActivityService {
     console.log(pesos)
     let send = this.users.map((x: any) => {
       if (x.id === id) {
-        x.accounts.pesos = pesos;
+        x.accounts.pesos = x.accounts.pesos + pesos;
       }
       return x;
     });

@@ -55,22 +55,22 @@ export class ChargeComponent implements OnInit {
         this.exchange = true;
       }
     })();
-    console.log(this.payment);
-    console.log(this.add_);
-    console.log(this.send);
   }
   getCharge() {
+    this.destinatary = this.router.url;
+    this.destinatary = this.destinatary.split(/\//)[3];
     let actualUser = this.userService.currentUser();
     let operation =
       this.payment || this.send
         ? actualUser.accounts.pesos - this.form.value.amount
         : actualUser.accounts.pesos + this.form.value.amount;
+    this.send
+      ? (this.form.value.concept = `${this.form.value.concept} ,transferenrencia realizada a ${this.destinatary}`)
+      : null;
     this.ActivityService.saveActivity(this.form.value);
     this.ActivityService.updateBalance(operation);
     ///////////////////////////////////////////////////////////////////////////////////////////////F
     // CONDICIONAL PARA TRANSFERENCIA
-    this.destinatary = this.router.url;
-    this.destinatary = this.destinatary.split(/\//)[3];
     this.send
       ? this.ActivityService.sendMoney(
           Number(this.destinatary),

@@ -32,7 +32,9 @@ export class AuthService {
       console.log(result[0].user);
       localStorage.setItem('id', JSON.stringify(result[0].id));
       // this.reduxService.update(result);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']).then(() => {
+        window.location.reload();
+      });
       return result;
     } else {
       console.log('verifique datos');

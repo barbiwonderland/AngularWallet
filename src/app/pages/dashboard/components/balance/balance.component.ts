@@ -9,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BalanceComponent implements OnInit {
   actualUser: any;
+  dolarAccount: boolean = false;
   constructor(private userService: userService) {}
 
   ngOnInit(): void {
-    this.actualUser =this.userService.currentUser();
-
+    this.actualUser = this.userService.currentUser();
+  }
+  toggleAccount() {
+    this.dolarAccount = !this.dolarAccount;
   }
 }
+//9767|JdDwDnb5EZj^Cw*0kGT9QC74VUGJc4iJ
+//53b64264a2b610e0589f

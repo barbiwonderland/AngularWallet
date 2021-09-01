@@ -1,11 +1,23 @@
 <div class="main">
+
   <div class="body text-center" style="color: rgb(238, 242, 245);">
 
+    <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon" (click)="toggleAccount()">
+      Cambiar Cuenta
+    </button>
+
     <div class="welcome">
-      <h1>Hola <span class="text-capitalize">{{actualUser.info.name  }}</span>, tu saldo en pesos es de
+
+      <h1 *ngIf="!dolarAccount">Hola <span class="text-capitalize">{{actualUser.info.name  }}</span>, tu saldo en pesos
+        es de
         {{actualUser.accounts.pesos | currency}}
       </h1>
+      <h1 *ngIf="dolarAccount">Hola <span class="text-capitalize">{{actualUser.info.name  }}</span>, tu saldo en dolares
+        es de
+        {{actualUser.accounts.dolar | currency}}
+      </h1>
     </div>
+
     <div class="main-button">
       <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
         [routerLink]="['/dashboard/charge/add']">
@@ -20,6 +32,11 @@
       [routerLink]="['/dashboard/payment/exchange']">
       Comprar Divisas
     </button>
+    <div class="dolarDetail" *ngIf="dolarAccount">
+      <iframe width="350px" height="250px" src="https://www.dolarsi.com/func/moduloArriba-n.html" frameborder="0"
+        scrolling="0" allowfullscreen=""></iframe>
+  
+    </div>
 
   </div>
 
