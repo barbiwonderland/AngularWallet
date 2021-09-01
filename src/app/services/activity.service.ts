@@ -40,11 +40,11 @@ export class ActivityService {
     this._snackBar.open('Agregado con éxito', '', {
       duration: 1500,
     });
-    // setTimeout(() => {
-    //   this.router.navigate(['/dashboard']).then(() => {
-    //     window.location.reload();
-    //   });
-    // }, 500);
+     setTimeout(() => {
+       this.router.navigate(['/dashboard']).then(() => {
+         window.location.reload();
+       });
+     }, 500);
   }
   sendMoney(id: number, pesos: any) {
     console.log(pesos)
