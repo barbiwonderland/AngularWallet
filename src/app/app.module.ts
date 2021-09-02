@@ -18,6 +18,7 @@ import { ChargeComponent } from "./pages/dashboard/components/charge/charge.comp
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { RegisterComponent } from './pages/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RegisterComponent } from './pages/register/register.component';
     DashboardModule,
     RouterModule,
      DashboardRoutingModule,
-     CommonModule
+     CommonModule,
+     HttpClientModule
   ],
 
   providers: [],

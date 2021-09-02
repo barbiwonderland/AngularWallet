@@ -29,7 +29,7 @@ export class AuthService {
       (x: any) => x.info.user === user && x.info.password === password
     );
     if (result.length) {
-      console.log(result[0].user);
+      console.log(result)
       localStorage.setItem('id', JSON.stringify(result[0].id));
       // this.reduxService.update(result);
       this.router.navigate(['/dashboard']).then(() => {

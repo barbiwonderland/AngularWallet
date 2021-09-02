@@ -1,25 +1,36 @@
 <div class="main">
   <form [formGroup]="form" (ngSubmit)="getCharge()">
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Monto</mat-label>
-      <input matInput type="number" class="example-right-align" placeholder="0" formControlName="amount">
-      <span matPrefix>$&nbsp;</span>
-      <span matSuffix>.00</span>
-    </mat-form-field>
+    <div>
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Monto</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="1" formControlName="amount" value="1" (ngModelChange)="cambioDolar($event)">
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always" *ngIf="exchange">
+        <mat-label>Conversión dolar</mat-label>
+        <input  matInput  class="example-right-align" placeholder="{{dolar}}" formControlName="dolarValue" value="{{dolar}}"  >
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Concepto</mat-label>
-      <input matInput placeholder="Alimentos"  formControlName="concept">
-    </mat-form-field>
+      <mat-form-field appearance="outline" *ngIf="!exchange">
+        <mat-label>Concepto</mat-label>
+        <input matInput placeholder="Alimentos" formControlName="concept">
+      </mat-form-field>
+ 
 
+      <mat-form-field appearance="outline">
+        <mat-label>Moneda</mat-label>
+        <mat-select formControlName="currency">
+          <mat-option value="peso">Peso Argentino</mat-option>
+          <mat-option value="dolar" [disabled]="send">Dolar</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Moneda</mat-label>
-      <mat-select formControlName="currency">
-        <mat-option value="peso">Peso Argentino</mat-option>
-        <mat-option value="dolar" [disabled]="send">Dolar</mat-option>
-      </mat-select>
-    </mat-form-field>
+    </div>
+
     <button type="submit" mat-raised-button color="primary">Agregar</button>
   </form>
+
 </div>
