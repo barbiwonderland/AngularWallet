@@ -1,1 +1,24 @@
-<p>fixed-term works!</p>
+<div class="main" >
+  <form>
+    <div>
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Monto a invertir</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="1" value="1" [(ngModel)]="monto" name="monto" >
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+<br>
+      <mat-form-field appearance="outline">
+        <mat-label>Moneda</mat-label>
+        <mat-select formControlName="currency">
+          <mat-option value="peso">Peso Argentino</mat-option>
+          <mat-option value="dolar" [disabled]="true">Dolar</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <button (click)="submit()" type="submit" mat-raised-button color="primary">Agregar</button>
+  </form>
+
+</div>

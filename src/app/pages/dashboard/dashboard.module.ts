@@ -1,3 +1,4 @@
+import { FixedTermComponent } from './components/fixed-term/fixed-term.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AngularMaterialModule } from './../../vendor/angular-material/angular-material.module';
 import { AppRoutingModule } from './../../app-routing.module';
@@ -11,6 +12,7 @@ import { BalanceComponent } from './components/balance/balance.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { TransferComponent } from './components/transfer/transfer.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +20,14 @@ import { TransferComponent } from './components/transfer/transfer.component';
   declarations: [
     BalanceComponent,
     ActivityComponent,
-    TransferComponent
+    TransferComponent,
+    FixedTermComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     AngularMaterialModule,
+    FormsModule
     
   
   
