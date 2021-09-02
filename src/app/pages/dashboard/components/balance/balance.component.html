@@ -29,9 +29,13 @@
       </button>
     </div>
     <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
-      [routerLink]="['/dashboard/payment/exchange']">
-      Comprar Divisas
+      [routerLink]="['/dashboard/payment/exchangeBuy']">
+      Comprar dolares
     </button>
+    <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
+    [routerLink]="['/dashboard/payment/exchangeSend']">
+    Vender dolares
+  </button>
     <div class="dolarDetail" *ngIf="dolarAccount">
       COMPRA: {{compra}} | VENTA:{{venta}}
 

@@ -21,7 +21,8 @@ export class ChargeComponent implements OnInit {
   add_: boolean = false;
   payment: boolean = false;
   send: boolean = false;
-  exchange: boolean = false;
+  exchangeSend: boolean = false;
+  exchangeBuy: boolean = false;
   generalAccounts!: any;
   destinatary!: any;
   localAccount!: any;
@@ -37,13 +38,12 @@ export class ChargeComponent implements OnInit {
     private conver: ConversionService
   ) {
     this.userId = this.userId ? JSON.parse(this.userId) : [];
-    let prueba = this.dolar;
     this.form = this.fb.group({
       concept: [''],
       amount: ['', [Validators.required, Validators.min(1)]],
       date: [new Date().toUTCString()],
       currency: ['', [Validators.required]],
-      dolarValue: "",
+      dolarValue: '',
       id: [`${this.userId}`],
     });
   }
@@ -52,17 +52,19 @@ export class ChargeComponent implements OnInit {
       // Verifica que tipo de acción es
       if (this.router.url.includes('add')) {
         this.add_ = true;
-        this.exchange = false;
+        this.exchangeBuy = false;
       } else if (this.router.url.includes('send')) {
         this.send = true;
-        this.exchange = false;
-      } else if (this.router.url.includes('exchange')) {
-        this.exchange = true;
+        this.exchangeBuy = false;
+      } else if (this.router.url.includes('exchangeBuy')) {
+        this.exchangeBuy = true;
+      } else if (this.router.url.includes('exchangeSend')) {
+        this.exchangeSend = true;
       } else if (this.router.url.includes('payment')) {
         this.payment = true;
-        this.exchange = false;
+        this.exchangeBuy = false;
       }
-      console.log(this.exchange);
+      console.log(this.exchangeBuy);
       this.conver.getChange().subscribe((data) => {
         let result = data[0].casa;
         const { compra, venta } = result;
@@ -80,22 +82,23 @@ export class ChargeComponent implements OnInit {
   getCharge() {
     console.log(this.form.value.dolarValue);
     this.form.value.dolarValue = this.dolar;
-    console.log(this.form.value)
+    console.log(this.form.value);
     this.destinatary = this.router.url;
     this.destinatary = this.destinatary.split(/\//)[3];
     let actualUser = this.userService.currentUser();
     let operation =
-      this.payment || this.send || this.exchange
+      this.payment || this.send || this.exchangeBuy
         ? actualUser.accounts.pesos - this.form.value.amount
         : actualUser.accounts.pesos + this.form.value.amount;
-    this.payment || this.send || this.exchange
+    this.payment || this.send || this.exchangeBuy
       ? (this.form.value.concept = `(-)${this.form.value.concept}`)
       : (this.form.value.concept = `(+)${this.form.value.concept}`);
     console.log(this.form.value.concept);
     this.send
       ? (this.form.value.concept = `${this.form.value.concept} ,transferenrencia realizada a ${this.destinatary}`)
       : null;
-    this.exchange ? (this.form.value.concept = 'Compra dolares') : null;
+    this.exchangeBuy ? (this.form.value.concept = 'Compra dolares') : null;
+    this.exchangeSend ? (this.form.value.concept = 'Venta dolares') : null;
 
     console.log(this.form.value.concept);
     this.ActivityService.saveActivity(this.form.value);
@@ -108,7 +111,10 @@ export class ChargeComponent implements OnInit {
           this.form.value.amount
         )
       : null;
-    this.exchange
+    this.exchangeSend
+      ? this.ActivityService.saleDollar(this.form.value.dolarValue)
+      : null;
+    this.exchangeBuy
       ? (() => {
           this.ActivityService.updateDolarAccount(this.form.value.dolarValue);
         })()

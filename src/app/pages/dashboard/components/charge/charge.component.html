@@ -7,14 +7,14 @@
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
-      <mat-form-field appearance="outline" floatLabel="always" *ngIf="exchange">
+      <mat-form-field appearance="outline" floatLabel="always" *ngIf="exchangeBuy || exchangeSend">
         <mat-label>Conversión dolar</mat-label>
         <input  matInput  class="example-right-align" placeholder="{{dolar}}" formControlName="dolarValue" value="{{dolar}}"  >
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" *ngIf="!exchange">
+      <mat-form-field appearance="outline" *ngIf="!(exchangeBuy  || exchangeSend)">
         <mat-label>Concepto</mat-label>
         <input matInput placeholder="Alimentos" formControlName="concept">
       </mat-form-field>

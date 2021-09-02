@@ -27,7 +27,7 @@ export class ActivityService {
     // console.log("mov guardado",newActivity)
     this.activity.push(newActivity);
     // Actualizo nuevo arreglo en LS
-    console.log(this.activity)
+    console.log(this.activity);
     localStorage.setItem('activities', JSON.stringify(this.activity));
   }
   updateBalance(pesos: any) {
@@ -68,7 +68,23 @@ export class ActivityService {
     // Modifico el Array de todas las cuentas
     let updateArrayUsers = this.users.map((el: any) => {
       if (el.id === currentUser) {
-        el.accounts.dolar =  el.accounts.dolar+dolar;
+        el.accounts.dolar = el.accounts.dolar + dolar;
+      }
+      return el;
+    });
+    localStorage.setItem('user', JSON.stringify(updateArrayUsers));
+    this._snackBar.open('Agregado con éxito', '', {
+      duration: 1500,
+    });
+  }
+
+  saleDollar(dolar: number) {
+    this.users = this.userService.getusers();
+    let currentUser = this.userService.idUser();
+    // Modifico el Array de todas las cuentas
+    let updateArrayUsers = this.users.map((el: any) => {
+      if (el.id === currentUser) {
+        el.accounts.dolar = el.accounts.dolar - dolar;
       }
       return el;
     });

@@ -16,7 +16,8 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: '', component: BalanceComponent, pathMatch: 'full' },
-      { path: 'payment/exchange', component: ChargeComponent },
+      { path: 'payment/exchangeBuy', component: ChargeComponent },
+      { path: 'payment/exchangeSend', component: ChargeComponent },
       { path: 'charge/payment', component: ChargeComponent },
       { path: 'send/:user', component: ChargeComponent },
       { path: 'charge/add', component: ChargeComponent },
