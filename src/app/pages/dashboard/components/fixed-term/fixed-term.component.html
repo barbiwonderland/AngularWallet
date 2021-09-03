@@ -1,16 +1,23 @@
-<div class="main" >
-  <form>
+<div class="main">
+
+  <form >
     <div>
+      <div class="button">
+        <button (click)="unlock()" mat-raised-button color="primary">Retirar</button>
+
+      </div>
+
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Monto a invertir</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="1" value="1" [(ngModel)]="monto" name="monto" >
+        <input matInput type="number" class="example-right-align" placeholder="1" value="1" [(ngModel)]="monto"
+          name="monto">
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
-<br>
+      <br>
       <mat-form-field appearance="outline">
         <mat-label>Moneda</mat-label>
-        <mat-select formControlName="currency">
+        <mat-select >
           <mat-option value="peso">Peso Argentino</mat-option>
           <mat-option value="dolar" [disabled]="true">Dolar</mat-option>
         </mat-select>

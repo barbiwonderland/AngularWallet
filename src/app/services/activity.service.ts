@@ -17,6 +17,10 @@ export class ActivityService {
     private _snackBar: MatSnackBar,
     private http: HttpClient
   ) {}
+  updateActivities(x:any){
+    localStorage.setItem('activities', JSON.stringify(x));
+
+  }
 
   saveActivity(formValue: any) {
     // me traigo lo que hay en activity si no hay nada asigno []
@@ -30,6 +34,13 @@ export class ActivityService {
     console.log(this.activity);
     localStorage.setItem('activities', JSON.stringify(this.activity));
   }
+  getActivities() {
+    this.activity = localStorage.getItem('activities');
+    this.activity = this.activity ? JSON.parse(this.activity) : [];
+    console.log(this.activity)
+    return this.activity;
+  }
+
   updateBalance(pesos: any) {
     this.users = this.userService.getusers();
     let currentUser = this.userService.idUser();

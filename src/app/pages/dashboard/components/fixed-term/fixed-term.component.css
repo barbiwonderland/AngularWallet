@@ -18,3 +18,9 @@ form{
 .mat-form-field {
     width: 100%;
 }
+.button{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10%;
+}

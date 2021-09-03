@@ -13,7 +13,7 @@ import { ReduxService } from './redux.service';
 })
 export class AuthService {
   id!: any;
-  users?: any = this.userService.getusers();
+  users?: any;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -24,12 +24,15 @@ export class AuthService {
     private reduxService: ReduxService
   ) {}
 
-  userExists(user: string, password: string) {
+  userExists(user: string, password: any) {
+    this.users = this.userService.getusers();
     let result = this.users.filter(
       (x: any) => x.info.user === user && x.info.password === password
     );
+    console.log(result, 'resultado preF');
+
     if (result.length) {
-      console.log(result)
+      console.log(result);
       localStorage.setItem('id', JSON.stringify(result[0].id));
       // this.reduxService.update(result);
       this.router.navigate(['/dashboard']).then(() => {
@@ -44,5 +47,4 @@ export class AuthService {
       });
     }
   }
-
 }
