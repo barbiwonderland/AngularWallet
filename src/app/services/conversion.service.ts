@@ -10,8 +10,8 @@ export class ConversionService {
 
   constructor(private http: HttpClient) {}
   // get results of conversion
-
-  getChange():Observable<any> {
+  // aplicar interfaz
+  getChange(): Observable<any> {
     let result = this.http.get<any>(this.url);
     console.log(result);
     return result;

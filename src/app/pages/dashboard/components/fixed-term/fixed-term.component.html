@@ -1,31 +1,40 @@
+<app-come-back-button></app-come-back-button>
+
+<div class="button-main" *ngIf="_input">
+
+  <button class="button" (click)="unlock()" mat-raised-button color="primary">Retirar plazo fijo</button>
+
+</div>
 <div class="main">
 
-  <form >
+  <form *ngIf="!_input">
     <div>
-      <div class="button">
-        <button (click)="unlock()" mat-raised-button color="primary">Retirar</button>
-
-      </div>
-
-      <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Monto a invertir</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="1" value="1" [(ngModel)]="monto"
-          name="monto">
-        <span matPrefix>$&nbsp;</span>
-        <span matSuffix>.00</span>
-      </mat-form-field>
-      <br>
-      <mat-form-field appearance="outline">
-        <mat-label>Moneda</mat-label>
-        <mat-select >
-          <mat-option value="peso">Peso Argentino</mat-option>
-          <mat-option value="dolar" [disabled]="true">Dolar</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-    </div>
-
+   
+<div > 
+  <mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Monto a invertir</mat-label>
+    <input matInput type="number" class="example-right-align" placeholder="1" value="1" [(ngModel)]="monto"
+      name="monto">
+    <span matPrefix>$&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Moneda</mat-label>
+    <mat-select >
+      <mat-option value="peso">Peso Argentino</mat-option>
+      <mat-option value="dolar" [disabled]="true">Dolar</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="button">
     <button (click)="submit()" type="submit" mat-raised-button color="primary">Agregar</button>
+
+  </div>
+
+</div>
+
+
+</div>
   </form>
 
 </div>

@@ -1,21 +1,33 @@
+import { IUser } from './../models/user.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class userService {
-  users?: any = this.getusers();
+  users: IUser[] = this.getusers();
   id!: number;
 
   constructor() {
     this.id = JSON.parse(localStorage.getItem('id')!);
   }
-  getusers() {
-    let data = localStorage.getItem('user');
-    data = data ? JSON.parse(data) : [];
+  //jdoc
+  /**
+   * recupera los usuarios en el local storage
+   * @returns IUser[]
+   */
+  getusers():IUser[] {
+    let getData:string = localStorage.getItem('user')!;
+    let data:IUser[] =  JSON.parse(getData) || [];
+    console.log(data);
     return data;
   }
+  /**
+   * jdoc comment
+   * @returns 
+   */
   currentUser() {
+    // find doesnt exist on property Iuser en find
     let currentUser = this.users.find((user: any) => user.id === this.id);
     console.log(currentUser);
     return currentUser;

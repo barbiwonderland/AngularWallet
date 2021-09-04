@@ -21,6 +21,7 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ComeBackButtonComponent } from './components/come-back-button/come-back-button.component';
 
 @NgModule({
   declarations: [

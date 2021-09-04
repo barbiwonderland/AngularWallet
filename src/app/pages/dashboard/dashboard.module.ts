@@ -1,3 +1,4 @@
+import { ComeBackButtonComponent } from './../../components/come-back-button/come-back-button.component';
 import { FixedTermComponent } from './components/fixed-term/fixed-term.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AngularMaterialModule } from './../../vendor/angular-material/angular-material.module';
@@ -15,24 +16,27 @@ import { TransferComponent } from './components/transfer/transfer.component';
 import { FormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     BalanceComponent,
     ActivityComponent,
     TransferComponent,
-    FixedTermComponent
+    FixedTermComponent,
+    ComeBackButtonComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     AngularMaterialModule,
-    FormsModule
+    FormsModule,
     
   
   
    
   ],
+  exports:[
+    ComeBackButtonComponent
+  ]
 
 })
 export class DashboardModule { }

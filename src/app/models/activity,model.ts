@@ -1,7 +1,8 @@
 export interface IActivity {
   concept: string;
   amount: number;
-  date: string;
+  date: Date;
   currency: string;
-  id: string;
+  dolarValue: number;
+  id: number;
 }

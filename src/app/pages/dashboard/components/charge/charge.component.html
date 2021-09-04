@@ -1,3 +1,5 @@
+<app-come-back-button></app-come-back-button>
+
 <div class="main">
   <form [formGroup]="form" (ngSubmit)="getCharge()">
     <div>
@@ -23,8 +25,8 @@
       <mat-form-field appearance="outline">
         <mat-label>Moneda</mat-label>
         <mat-select formControlName="currency">
-          <mat-option value="peso">Peso Argentino</mat-option>
-          <mat-option value="dolar" [disabled]="send">Dolar</mat-option>
+          <mat-option value="peso" [disabled]="(exchangeSend)"> Peso Argentino</mat-option>
+          <mat-option value="dolar" [disabled]="!(exchangeSend) ">Dolar</mat-option>
         </mat-select>
       </mat-form-field>
 

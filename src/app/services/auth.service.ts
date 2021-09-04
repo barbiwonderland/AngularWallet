@@ -1,3 +1,4 @@
+import { IUser } from './../models/user.model';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -12,8 +13,7 @@ import { ReduxService } from './redux.service';
   providedIn: 'root',
 })
 export class AuthService {
-  id!: any;
-  users?: any;
+  users!: IUser[];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -25,7 +25,9 @@ export class AuthService {
   ) {}
 
   userExists(user: string, password: any) {
+    // Type 'string' is not assignable to type 'IUser'.ts(2322)
     this.users = this.userService.getusers();
+    // Property 'filter' does not exist on type 'IUser'.
     let result = this.users.filter(
       (x: any) => x.info.user === user && x.info.password === password
     );
@@ -45,6 +47,7 @@ export class AuthService {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
+      return null;
     }
   }
 }

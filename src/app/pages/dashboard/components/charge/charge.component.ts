@@ -81,6 +81,7 @@ export class ChargeComponent implements OnInit {
   }
   getCharge() {
     console.log(this.form.value.dolarValue);
+  //***************** */ HAY MANERA DE QUE SE ASIGNE OBTENIENDO EL VALOR DEL VALUE ACA?******************************
     this.form.value.dolarValue = this.dolar;
     console.log(this.form.value);
     this.destinatary = this.router.url;
@@ -88,8 +89,8 @@ export class ChargeComponent implements OnInit {
     let actualUser = this.userService.currentUser();
     let operation =
       this.payment || this.send || this.exchangeBuy
-        ? actualUser.accounts.pesos - this.form.value.amount
-        : actualUser.accounts.pesos + this.form.value.amount;
+        ? actualUser!.accounts.pesos - this.form.value.amount
+        : actualUser!.accounts.pesos + this.form.value.amount;
     this.payment || this.send || this.exchangeBuy
       ? (this.form.value.concept = `(-)${this.form.value.concept}`)
       : (this.form.value.concept = `(+)${this.form.value.concept}`);

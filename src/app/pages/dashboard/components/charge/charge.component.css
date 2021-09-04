@@ -1,9 +1,5 @@
 .main {
-  display: flex;
-  vertical-align: middle;
-  margin: auto;
-  height: 100%;
-  align-items: center;
+ margin-top: 2%;
 }
 
 .mat-form-field {
@@ -23,7 +19,7 @@ form {
   align-self: center;
   justify-content: center;
   margin: auto;
-  height: 60vh;
+  height: 50vh;
   width: 70%;
   padding: 1%;
   border-radius: 5px;
