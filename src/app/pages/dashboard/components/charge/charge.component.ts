@@ -110,7 +110,7 @@ export class ChargeComponent implements OnInit {
     // Verifico tipo de operación para pasar por parametro en el submit
     this.ActivityService.updateBalance(
       this.form.value.amount,
-      this.add_ ? 'suma' : 'resta'
+      this.add_ || this.exchangeSend ? 'suma' : 'resta'
     );
 
     ///////////////////////////////////////////////////////////////////////////////////////////////F
