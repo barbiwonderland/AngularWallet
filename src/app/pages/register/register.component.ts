@@ -3,7 +3,6 @@ import { ParseSourceSpan } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +12,7 @@ import { IUser } from 'src/app/models/user.model';
 export class RegisterComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup;
-  listUsers?: IUser[];
+  listUsers?: any;
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +48,7 @@ export class RegisterComponent implements OnInit {
         dolar: 0,
       },
     };
-    let newArray = this.listUsers?.push(userForm);
+    let newArray = [...this.listUsers, userForm];
     localStorage.setItem('user', JSON.stringify(newArray));
     this.router.navigate(['/login']);
   }

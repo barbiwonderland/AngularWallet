@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { userService } from './user.service';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
-import { NgIf } from '@angular/common';
-
+import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root',
 })
@@ -60,7 +58,6 @@ export class ActivityService {
    * @param pesos
    * @param operation
    */
-
   updateBalance(pesos: number, operation: string) {
     // Type 'string' is not assignable to type 'IUser | undefined'.
     this.users = this.userService.getusers()!;
@@ -70,18 +67,35 @@ export class ActivityService {
       if (el.id === currentUserId) {
         if (operation === 'suma') {
           el.accounts.pesos = pesos + el.accounts.pesos;
+          Swal.fire({
+            title: 'Operación realizada con éxito!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            timer: 2000,
+          });
         } else {
           el.accounts.pesos > 0 && el.accounts.pesos - pesos >= 0
-            ? (el.accounts.pesos = el.accounts.pesos - pesos)
-            : alert('no posee saldo');
+            ? (el.accounts.pesos = el.accounts.pesos - pesos) &&
+              Swal.fire({
+                title: 'Operación realizada con éxito!',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                timer: 2000,
+              })
+            : Swal.fire({
+                title: 'Error!',
+                text: 'No posee suficiente Saldo',
+                icon: 'error',
+                confirmButtonText: 'OK',
+                timer: 2000,
+              });
         }
       }
       return el;
     });
+
     localStorage.setItem('user', JSON.stringify(updateArrayUsers));
-    this._snackBar.open('Agregado con éxito', '', {
-      duration: 1500,
-    });
+
     setTimeout(() => {
       this.router.navigate(['/dashboard']).then(() => {
         window.location.reload();
@@ -133,13 +147,22 @@ export class ActivityService {
     // Modifico el Array de todas las cuentas
     let updateArrayUsers = this.users.map((el: any) => {
       if (el.id === currentUser) {
-        el.accounts.dolar = el.accounts.dolar - dolar;
+        if (el.accounts.dolar - dolar >= 0) {
+          el.accounts.dolar = el.accounts.dolar - dolar;
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'No posee suficiente Saldo',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            timer: 2000,
+          });
+        }
+        return el;
+
       }
-      return el;
     });
+    console.log(updateArrayUsers);
     localStorage.setItem('user', JSON.stringify(updateArrayUsers));
-    this._snackBar.open('Agregado con éxito', '', {
-      duration: 1500,
-    });
   }
 }

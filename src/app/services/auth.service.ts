@@ -7,7 +7,6 @@ import {
 import { userService } from './user.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReduxService } from './redux.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,14 +19,16 @@ export class AuthService {
   constructor(
     private userService: userService,
     private router: Router,
-    private _snackBar: MatSnackBar,
-    private reduxService: ReduxService
+    private _snackBar: MatSnackBar
   ) {}
-
+  /**
+   * Comprueba si los campos ingresados existen en los usuarios
+   * @param user
+   * @param password
+   * @returns
+   */
   userExists(user: string, password: any) {
-    // Type 'string' is not assignable to type 'IUser'.ts(2322)
     this.users = this.userService.getusers();
-    // Property 'filter' does not exist on type 'IUser'.
     let result = this.users.filter(
       (x: any) => x.info.user === user && x.info.password === password
     );
