@@ -44,7 +44,7 @@ export class ChargeComponent implements OnInit {
       date: [new Date().toUTCString()],
       currency: ['', [Validators.required]],
       dolarValue: '',
-      id: [`${this.userId}`],
+      id: [this.userId],
     });
   }
   ngOnInit(): void {
@@ -97,7 +97,9 @@ export class ChargeComponent implements OnInit {
     let destinatary = destinataryUrl.split(/\//)[3];
     this.payment || this.send || this.exchangeBuy
       ? (this.form.value.concept = `(-)${this.form.value.concept}`)
-      : (this.form.value.concept = `(+)${this.form.value.concept}`);
+      : this.add_
+      ? (this.form.value.concept = `(+)${this.form.value.concept}`)
+      : null;
     console.log(this.form.value.concept);
     this.send
       ? (this.form.value.concept = `${this.form.value.concept} ,transferenrencia realizada a ${destinatary}`)
@@ -108,11 +110,13 @@ export class ChargeComponent implements OnInit {
     console.log(this.form.value.concept);
     this.ActivityService.saveActivity(this.form.value);
     // Verifico tipo de operación para pasar por parametro en el submit
-    this.ActivityService.updateBalance(
-      this.form.value.amount,
-      // mejorar para venta dolares
-      this.add_ || this.exchangeSend ? 'suma' : 'resta'
-    );
+    if (this.exchangeBuy || this.add_ || this.send || this.payment) {
+      this.ActivityService.updateBalance(
+        this.form.value.amount,
+        // mejorar para venta dolares
+        this.add_ ? 'suma' : 'resta'
+      );
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////F
     // CONDICIONAL PARA TRANSFERENCIA
@@ -123,7 +127,10 @@ export class ChargeComponent implements OnInit {
         )
       : null;
     this.exchangeSend
-      ? this.ActivityService.saleDollar(this.form.value.dolarValue)
+      ? this.ActivityService.saleDollar(
+          this.form.value.dolarValue,
+          this.form.value.amount
+        )
       : null;
     this.exchangeBuy
       ? (() => {
@@ -131,5 +138,4 @@ export class ChargeComponent implements OnInit {
         })()
       : null;
   }
-
 }

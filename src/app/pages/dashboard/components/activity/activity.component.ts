@@ -1,3 +1,4 @@
+import { userService } from './../../../../services/user.service';
 import { ActivityService } from './../../../../services/activity.service';
 import { IActivity } from './../../../../models/activity,model';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
@@ -17,10 +18,17 @@ export class ActivityComponent implements AfterViewInit {
 
   activity!: IActivity[];
   dataSource!: any;
-  constructor(private ActivityService: ActivityService) {}
+  constructor(
+    private ActivityService: ActivityService,
+    private userService: userService
+  ) {}
   ngOnInit(): void {
-    this.activity = this.ActivityService.getActivities();
-    this.dataSource = new MatTableDataSource(this.activity);
+    const idUser = this.userService.idUser();
+    const activities = this.ActivityService.getActivities();
+    const activitiesById = activities.filter((x) => {
+      return x.id === idUser;
+    });
+    this.dataSource = new MatTableDataSource(activitiesById);
   }
 
   ngAfterViewInit() {

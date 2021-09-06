@@ -141,7 +141,7 @@ export class ActivityService {
    * Guarda el balance cuando vendes dolares
    * @param dolar
    */
-  saleDollar(dolar: number) {
+  saleDollar(dolar: number, pesos: number) {
     this.users = this.userService.getusers();
     let currentUser = this.userService.idUser();
     // Modifico el Array de todas las cuentas
@@ -150,19 +150,14 @@ export class ActivityService {
         if (el.accounts.dolar - dolar >= 0) {
           el.accounts.dolar = el.accounts.dolar - dolar;
         } else {
-          Swal.fire({
-            title: 'Error!',
-            text: 'No posee suficiente Saldo',
-            icon: 'error',
-            confirmButtonText: 'OK',
-            timer: 2000,
-          });
+          console.log('no');
         }
         return el;
-
       }
     });
+
     console.log(updateArrayUsers);
     localStorage.setItem('user', JSON.stringify(updateArrayUsers));
+    this.updateBalance(pesos, 'suma');
   }
 }
