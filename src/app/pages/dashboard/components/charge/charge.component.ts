@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { add, substract } from 'src/app/redux/actions/operations.actions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,7 +36,9 @@ export class ChargeComponent implements OnInit {
     private userService: userService,
     private conver: ConversionService
   ) {
+    // Datos del id actual
     this.userId = this.userId ? JSON.parse(this.userId) : [];
+    // Datos del form
     this.form = this.fb.group({
       concept: [''],
       amount: ['', [Validators.required, Validators.min(1)]],
@@ -49,7 +50,7 @@ export class ChargeComponent implements OnInit {
   }
   ngOnInit(): void {
     (() => {
-      // Verifica que tipo de acción es
+      // Verifica que tipo de acción es mediante url
       if (this.router.url.includes('add')) {
         this.add_ = true;
         this.exchangeBuy = false;
@@ -74,6 +75,7 @@ export class ChargeComponent implements OnInit {
     })();
     this.add_ ? this.operation === 'suma' : this.operation === 'resta';
   }
+  // Obtengo los datos de cambio
   conversionDolar(value: number) {
     if (this.exchangeBuy) {
       let conversionBuy = value / parseInt(this.compra);
@@ -126,12 +128,21 @@ export class ChargeComponent implements OnInit {
           this.form.value.amount
         )
       : null;
-    this.exchangeSend
-      ? this.ActivityService.saleDollar(
+    // Condicional para venta de dolares
+    if (this.exchangeSend) {
+      let userInfo = this.userService.currentUser()!;
+      const userDolarBalance = userInfo.accounts.dolar;
+      console.log(userInfo);
+      if (userDolarBalance - this.form.value.dolarValue >= 0) {
+        this.ActivityService.saleDollar(
           this.form.value.dolarValue,
           this.form.value.amount
-        )
-      : null;
+        );
+      } else {
+        alert('no posee saldo');
+      }
+    }
+    // Condicional para compra de dolares
     this.exchangeBuy
       ? (() => {
           this.ActivityService.updateDolarAccount(this.form.value.dolarValue);

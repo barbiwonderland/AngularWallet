@@ -152,8 +152,9 @@ export class ActivityService {
         } else {
           console.log('no');
         }
-        return el;
+      
       }
+      return el;
     });
 
     console.log(updateArrayUsers);
