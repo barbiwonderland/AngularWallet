@@ -149,10 +149,7 @@ export class ActivityService {
       if (el.id === currentUser) {
         if (el.accounts.dolar - dolar >= 0) {
           el.accounts.dolar = el.accounts.dolar - dolar;
-        } else {
-          console.log('no');
-        }
-      
+        } 
       }
       return el;
     });

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-charge',
@@ -139,7 +140,13 @@ export class ChargeComponent implements OnInit {
           this.form.value.amount
         );
       } else {
-        alert('no posee saldo');
+        Swal.fire({
+          title: 'Error!',
+          text: 'No posee suficiente Saldo',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          timer: 2000,
+        });
       }
     }
     // Condicional para compra de dolares
