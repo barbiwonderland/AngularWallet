@@ -1,14 +1,6 @@
 import { AuthService } from './../../services/auth.service';
-import { userService } from './../../services/user.service';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-import { ReduxService } from 'src/app/services/redux.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

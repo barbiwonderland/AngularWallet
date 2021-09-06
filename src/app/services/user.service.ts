@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class userService {
-  users: IUser[] = this.getusers();
+  users?: IUser[];
   id!: number;
 
   constructor() {
@@ -16,22 +16,27 @@ export class userService {
    * recupera los usuarios en el local storage
    * @returns IUser[]
    */
-  getusers():IUser[] {
-    let getData:string = localStorage.getItem('user')!;
-    let data:IUser[] =  JSON.parse(getData) || [];
+  getusers(): IUser[] {
+    let getData: string = localStorage.getItem('user')!;
+    let data: IUser[] = JSON.parse(getData) || [];
     console.log(data);
     return data;
   }
   /**
-   * jdoc comment
-   * @returns 
+   * Devuelve los datos del usuario loggeado
+   * @returns
    */
   currentUser() {
     // find doesnt exist on property Iuser en find
+    this.users = this.getusers();
     let currentUser = this.users.find((user: any) => user.id === this.id);
     console.log(currentUser);
     return currentUser;
   }
+  /**
+   * Devueleve el id del usuario logeado
+   * @returns number
+   */
   idUser() {
     return this.id;
   }

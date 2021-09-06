@@ -4,6 +4,7 @@ import { userService } from './../../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { CompilerFacadeImpl } from '@angular/compiler/src/jit_compiler_facade';
 import { compileDeclareClassMetadata } from '@angular/compiler';
+import { IUser } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-balance',
@@ -11,10 +12,10 @@ import { compileDeclareClassMetadata } from '@angular/compiler';
   styleUrls: ['./balance.component.css'],
 })
 export class BalanceComponent implements OnInit {
-  actualUser: any;
+  actualUser!: IUser;
   dolarAccount: boolean = false;
-  compra?:number;
-  venta?:number;
+  compra?: number;
+  venta?: number;
   constructor(
     private userService: userService,
     private ActivityService: ActivityService,
@@ -22,12 +23,12 @@ export class BalanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.actualUser = this.userService.currentUser();
+    this.actualUser = this.userService.currentUser()!;
     this.conver.getChange().subscribe((data) => {
       let result = data[0].casa;
       const { compra, venta } = result;
-      this.compra=compra;
-      this.venta=venta;
+      this.compra = compra;
+      this.venta = venta;
     });
   }
   toggleAccount() {

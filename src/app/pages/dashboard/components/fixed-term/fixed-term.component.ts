@@ -23,13 +23,10 @@ export class FixedTermComponent implements OnInit {
     activitiesCopy ? (this._input = true) : null;
   }
   submit() {
-    console.log(this.monto);
     let currentUser = this.userService.currentUser();
     let id = currentUser!.id;
-    let pesosUser = currentUser!.accounts.pesos;
-     let result= pesosUser - this.monto;
     console.log(currentUser);
-    this.ActivityService.updateBalance(result);
+    this.ActivityService.updateBalance(this.monto,"resta");
     let activity = {
       amount: this.monto,
       concept: 'PLAZO FIJO',
@@ -56,9 +53,9 @@ export class FixedTermComponent implements OnInit {
     const diffDays = Math.round(
       Math.abs((Number(firstDate) - Number(secondDate)) / oneDay)
     );
-    const newTotal = pesos + (activitiesCopy.amount + (diffDays * 1) / 100);
+    const newTotal = (activitiesCopy.amount + (diffDays * 1) / 100);
     console.log(newTotal);
-    this.ActivityService.updateBalance(newTotal);
+    this.ActivityService.updateBalance(newTotal,"suma");
     let filtered = activities.filter((x: any) => {
       return x.concept !== 'PLAZO FIJO';
     });

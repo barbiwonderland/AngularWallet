@@ -11,6 +11,10 @@ export class ConversionService {
   constructor(private http: HttpClient) {}
   // get results of conversion
   // aplicar interfaz
+  /**
+   * Petición http Devuelve todos los tipos de cambio
+   * @returns Observable 
+   */
   getChange(): Observable<any> {
     let result = this.http.get<any>(this.url);
     console.log(result);

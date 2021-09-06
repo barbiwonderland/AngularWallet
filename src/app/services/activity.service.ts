@@ -1,4 +1,4 @@
-import { IUser } from './../models/user.model';
+import { IUser, Accounts } from './../models/user.model';
 import { IActivity } from './../models/activity,model';
 import { Router } from '@angular/router';
 import { userService } from './user.service';
@@ -12,24 +12,29 @@ import { NgIf } from '@angular/common';
 })
 export class ActivityService {
   activity!: IActivity[];
-  users!:IUser[];
+  users!: IUser[];
 
   constructor(
     private userService: userService,
     private router: Router,
-    private _snackBar: MatSnackBar,
-    private http: HttpClient
+    private _snackBar: MatSnackBar
   ) {}
-  updateActivities(x:any){
+  /**
+   * Actualiza todo el listado de actividades existente por uno nuevo
+   * @param x
+   */
+  updateActivities(x: any) {
     localStorage.setItem('activities', JSON.stringify(x));
-
   }
-
+  /**
+   * Guarda una nueva actividad
+   * @param formValue
+   */
   saveActivity(formValue: IActivity) {
     // me traigo lo que hay en activity si no hay nada asigno []
     //**************** */ Type 'string' is not assignable to type 'IActivity'.
     const getActivity = localStorage.getItem('activities')!;
-    this.activity =<IActivity[]>JSON.parse(getActivity)  || [];
+    this.activity = <IActivity[]>JSON.parse(getActivity) || [];
     //GUARDO NUEVO MOVIVIMIENTO
     let newActivity = formValue;
     // console.log("mov guardado",newActivity)
@@ -39,22 +44,37 @@ export class ActivityService {
     console.log(this.activity);
     localStorage.setItem('activities', JSON.stringify(this.activity));
   }
+  /**
+   * Muestra todo el listado de movimientos
+   * @returns
+   */
   getActivities() {
     // Type 'string' is not assignable to type 'IActivity'.ts(2322)
-    const activities= localStorage.getItem('activities')!;
-    this.activity = this.activity ? JSON.parse(activities) : [];
-    console.log(this.activity)
+    const activities = localStorage.getItem('activities')!;
+    this.activity = JSON.parse(activities) || [];
+    console.log(this.activity);
     return this.activity;
   }
+  /**
+   * Modificar el balance , se debe indicar monto y tipo de operación (suma o resta == string)
+   * @param pesos
+   * @param operation
+   */
 
-  updateBalance(pesos: number) {
+  updateBalance(pesos: number, operation: string) {
     // Type 'string' is not assignable to type 'IUser | undefined'.
     this.users = this.userService.getusers()!;
     const currentUserId = this.userService.idUser();
     // Modifico el Array de todas las cuentas
     let updateArrayUsers = this.users.map((el: any) => {
       if (el.id === currentUserId) {
-        el.accounts.pesos = pesos;
+        if (operation === 'suma') {
+          el.accounts.pesos = pesos + el.accounts.pesos;
+        } else {
+          el.accounts.pesos > 0 && el.accounts.pesos - pesos >= 0
+            ? (el.accounts.pesos = el.accounts.pesos - pesos)
+            : alert('no posee saldo');
+        }
       }
       return el;
     });
@@ -68,6 +88,11 @@ export class ActivityService {
       });
     }, 500);
   }
+  /**
+   * Transferencia a otro usuario
+   * @param id
+   * @param pesos
+   */
   sendMoney(id: number, pesos: number) {
     console.log(pesos);
     let send = this.users.map((x: any) => {
@@ -79,7 +104,10 @@ export class ActivityService {
     console.log(send);
     localStorage.setItem('user', JSON.stringify(send));
   }
-
+  /**
+   * Operación cuando se compran dolares
+   * @param dolar
+   */
   updateDolarAccount(dolar: number) {
     this.users = this.userService.getusers();
     let currentUser = this.userService.idUser();
@@ -95,7 +123,10 @@ export class ActivityService {
       duration: 1500,
     });
   }
-
+  /**
+   * Guarda el balance cuando vendes dolares
+   * @param dolar
+   */
   saleDollar(dolar: number) {
     this.users = this.userService.getusers();
     let currentUser = this.userService.idUser();

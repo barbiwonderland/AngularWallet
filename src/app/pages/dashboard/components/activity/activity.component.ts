@@ -1,3 +1,5 @@
+import { ActivityService } from './../../../../services/activity.service';
+import { IActivity } from './../../../../models/activity,model';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,12 +15,11 @@ export class ActivityComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  activity!: any;
+  activity!: IActivity[];
   dataSource!: any;
+  constructor(private ActivityService: ActivityService) {}
   ngOnInit(): void {
-    this.activity = localStorage.getItem('activities');
-    this.activity = this.activity != null ? JSON.parse(this.activity) : null;
-    console.log(this.activity);
+    this.activity = this.ActivityService.getActivities();
     this.dataSource = new MatTableDataSource(this.activity);
   }
 
@@ -27,7 +28,7 @@ export class ActivityComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  displayedColumns: string[] = ['date', 'concept', 'amount','currency'];
+  displayedColumns: string[] = ['date', 'concept', 'amount', 'currency'];
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

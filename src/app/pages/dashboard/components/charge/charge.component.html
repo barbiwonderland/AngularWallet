@@ -4,14 +4,15 @@
   <form [formGroup]="form" (ngSubmit)="getCharge()">
     <div>
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Monto</mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="1" formControlName="amount" value="1" (ngModelChange)="cambioDolar($event)">
+        <mat-label>Pesos</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="1" formControlName="amount" value="1"  (ngModelChange)="conversionDolar($event)" >
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>
       <mat-form-field appearance="outline" floatLabel="always" *ngIf="exchangeBuy || exchangeSend">
         <mat-label>Conversión dolar</mat-label>
-        <input  matInput  class="example-right-align" placeholder="{{dolar}}" formControlName="dolarValue" value="{{dolar}}"  >
+        <input  matInput  class="example-right-align" placeholder="{{dolarValue}}" formControlName="dolarValue" value="{{this.dolar}}" *ngIf="!exchangeSend"  >
+        <input  matInput  class="example-right-align" placeholder="{{dolarValue}}" formControlName="dolarValue" value="{{dolarValue}}" *ngIf="exchangeSend" >
         <span matPrefix>$&nbsp;</span>
         <span matSuffix>.00</span>
       </mat-form-field>

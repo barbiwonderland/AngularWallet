@@ -1,19 +1,12 @@
+import { IUser } from './../../models/user.model';
 import { dataUser } from './../actions/user.actions';
 import { createReducer, on } from '@ngrx/store';
-export const initialState:Array<any> =[ {
-  user: '',
-  password: '',
-  email: '',
-  surname: '',
-  id: '',
-  name: '',
-}]
-
+export const initialState:IUser[]=[];
 const _userReducer = createReducer(
   initialState,
   on(dataUser, (state, { user }) => user)
 );
 
-export function userReducer(state: any, action:any) {
+export function userReducer(state: IUser[], action:any) {
   return _userReducer(state,action);
 }

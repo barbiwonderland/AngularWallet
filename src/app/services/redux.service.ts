@@ -1,8 +1,9 @@
+import { IUser } from './../models/user.model';
 import { dataUser } from './../redux/actions/user.actions';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
-import { add, substract } from '../redux/actions/counter.action';
+import { add, substract } from '../redux/actions/operations.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +21,11 @@ export class ReduxService {
   substract(n: number) {
     this.store.dispatch(substract({ num: n }));
   }
-  update(user: any) {
-    this.store.dispatch(dataUser({ user}));
+  /**
+   * Actualiza los datos del usuario loggeado
+   * @param user
+   */
+  update(user: IUser[]) {
+    this.store.dispatch(dataUser({ user }));
   }
-
-
 }

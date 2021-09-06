@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { add, substract } from 'src/app/redux/actions/counter.action';
+import { add, substract } from 'src/app/redux/actions/operations.actions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,12 +23,12 @@ export class ChargeComponent implements OnInit {
   send: boolean = false;
   exchangeSend: boolean = false;
   exchangeBuy: boolean = false;
-  generalAccounts!: any;
-  destinatary!: any;
-  localAccount!: any;
   compra!: any;
   venta!: any;
   dolar: number = 0;
+  dolarValue?: number;
+  operation!: string;
+
   constructor(
     private fb: FormBuilder,
     private store: Store<{ count: number }>,
@@ -72,43 +72,52 @@ export class ChargeComponent implements OnInit {
         this.venta = venta;
       });
     })();
+    this.add_ ? this.operation === 'suma' : this.operation === 'resta';
+  }
+  conversionDolar(value: number) {
+    if (this.exchangeBuy) {
+      let conversionBuy = value / parseInt(this.compra);
+      conversionBuy = Math.round(conversionBuy * 100) / 100;
+      console.log(conversionBuy);
+      this.dolarValue = conversionBuy;
+    } else if (this.exchangeSend) {
+      let amountDolar = this.venta;
+      let getDolar = value / parseInt(amountDolar);
+      getDolar = Math.round(getDolar * 100) / 100;
+      this.dolarValue = getDolar;
+    }
   }
 
-  cambioDolar(valor: number) {
-    this.dolar = valor / parseInt(this.compra);
-    this.dolar = Math.round(this.dolar * 100) / 100;
-    console.log(typeof this.dolar);
-  }
   getCharge() {
     console.log(this.form.value.dolarValue);
-  //***************** */ HAY MANERA DE QUE SE ASIGNE OBTENIENDO EL VALOR DEL VALUE ACA?******************************
-    this.form.value.dolarValue = this.dolar;
+    //***************** */ HAY MANERA DE QUE SE ASIGNE OBTENIENDO EL VALOR DEL VALUE ACA?******************************
+    this.form.value.dolarValue = this.dolarValue;
     console.log(this.form.value);
-    this.destinatary = this.router.url;
-    this.destinatary = this.destinatary.split(/\//)[3];
-    let actualUser = this.userService.currentUser();
-    let operation =
-      this.payment || this.send || this.exchangeBuy
-        ? actualUser!.accounts.pesos - this.form.value.amount
-        : actualUser!.accounts.pesos + this.form.value.amount;
+    let destinataryUrl = this.router.url;
+    let destinatary = destinataryUrl.split(/\//)[3];
     this.payment || this.send || this.exchangeBuy
       ? (this.form.value.concept = `(-)${this.form.value.concept}`)
       : (this.form.value.concept = `(+)${this.form.value.concept}`);
     console.log(this.form.value.concept);
     this.send
-      ? (this.form.value.concept = `${this.form.value.concept} ,transferenrencia realizada a ${this.destinatary}`)
+      ? (this.form.value.concept = `${this.form.value.concept} ,transferenrencia realizada a ${destinatary}`)
       : null;
     this.exchangeBuy ? (this.form.value.concept = 'Compra dolares') : null;
     this.exchangeSend ? (this.form.value.concept = 'Venta dolares') : null;
 
     console.log(this.form.value.concept);
     this.ActivityService.saveActivity(this.form.value);
-    this.ActivityService.updateBalance(operation);
+    // Verifico tipo de operación para pasar por parametro en el submit
+    this.ActivityService.updateBalance(
+      this.form.value.amount,
+      this.add_ ? 'suma' : 'resta'
+    );
+
     ///////////////////////////////////////////////////////////////////////////////////////////////F
     // CONDICIONAL PARA TRANSFERENCIA
     this.send
       ? this.ActivityService.sendMoney(
-          Number(this.destinatary),
+          Number(destinatary),
           this.form.value.amount
         )
       : null;
@@ -122,10 +131,4 @@ export class ChargeComponent implements OnInit {
       : null;
   }
 
-  // add(n: number) {
-  //   this.store.dispatch(add({ num: n }));
-  // }
-  // substract(n: number) {
-  //   this.store.dispatch(substract({ num: n }));
-  // }
 }

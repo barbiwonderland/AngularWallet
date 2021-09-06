@@ -26,5 +26,8 @@ form {
 .button-main {
   display: flex;
   justify-content: center;
+  width: 20%;
+  margin: auto;
+ 
 
 }
