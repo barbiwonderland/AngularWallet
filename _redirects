@@ -1,1 +1,9 @@
 /* /index.html 200
+/dashboard /dashboard
+/activity /activity
+/transfer /transfer
+/fixed-term /fixed-term
+/dashboard/charge/add /dashboard/charge/add
+/dashboard/charge/payment /dashboard/charge/payment
+/dashboard/payment/exchangeBuy /dashboard/payment/exchangeBuy
+/dashboard/payment/exchangeSend /dashboard/payment/exchangeSend
