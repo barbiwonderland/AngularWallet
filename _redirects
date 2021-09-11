@@ -1,9 +1,1 @@
 /* /index.html 200
-/login /dashboard
-/activity /activity
-/transfer /transfer
-/fixed-term /fixed-term
-/dashboard/charge/add /dashboard/charge/add
-/dashboard/charge/payment /dashboard/charge/payment
-/dashboard/payment/exchangeBuy /dashboard/payment/exchangeBuy
-/dashboard/payment/exchangeSend /dashboard/payment/exchangeSend
