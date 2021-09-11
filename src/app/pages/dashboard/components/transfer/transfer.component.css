@@ -9,6 +9,7 @@ table {
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  margin:auto
 }
 td {
   text-align: left;
@@ -31,3 +32,6 @@ td {
   display: flex;
   align-items: center;
 }
+/* td{
+  width: 100%;
+} */
