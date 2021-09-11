@@ -31,3 +31,6 @@ td {
   display: flex;
   align-items: center;
 }
+th.mat-header-cell{
+  font-size: 0.7rem;
+}

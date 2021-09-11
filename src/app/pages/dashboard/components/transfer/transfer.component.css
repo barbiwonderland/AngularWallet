@@ -32,6 +32,9 @@ td {
   display: flex;
   align-items: center;
 }
-/* td{
-  width: 100%;
-} */
+th.mat-header-cell{
+  font-size: 0.7rem;
+}
+th.mat-header-cell:last-of-type{
+  text-align: center;
+}
