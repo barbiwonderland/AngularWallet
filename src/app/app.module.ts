@@ -22,6 +22,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ComeBackButtonComponent } from './components/come-back-button/come-back-button.component';
+import { userReducer } from './redux/reducers/user.reducer';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ComeBackButtonComponent } from './components/come-back-button/come-back
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ reducerGroup }),
+    StoreModule.forRoot( {user: userReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode

@@ -1,7 +1,5 @@
+import { ReduxService } from './services/redux.service';
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-root',
@@ -10,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'AngularWallet';
-
+  constructor(private ReduxService: ReduxService) {}
   ngOnInit(): void {
+    this.ReduxService.current();
   }
 }

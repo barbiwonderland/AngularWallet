@@ -4,6 +4,6 @@ import { counterReducer } from './operations.reducer';
 import { userReducer } from './user.reducer';
 
 export const reducerGroup = combineReducers({
-  counter: counterReducer,
-  // user: userReducer,
+  // counter: counterReducer,
+  user: userReducer,
 });

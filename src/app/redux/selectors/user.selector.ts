@@ -1,15 +1,10 @@
-// // import { User } from './../../app/models/user';
-// // import * as mainUser from "../reducers/user.reducer"
-// // import {
-// //   createReducer,
-// //   on,
-// //   createSelector,
-// //   createFeatureSelector,
-// // } from '@ngrx/store';
+  import * as x from "../reducers/user.reducer"
+  import {
+    createReducer,
+    on,
+    createSelector,
+    createFeatureSelector,
+  } from '@ngrx/store';
 
-// // export const getuserState = createFeatureSelector<mainUser.any>('user');
-
-// // export const getUser = createSelector(
-// //   getuserState,
-// //   (state: mainUser.any) => state
-// // );
+// export const getUserState = createFeatureSelector<x.any>("user")
+export const getState = createFeatureSelector<any>('user');

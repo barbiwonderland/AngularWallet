@@ -1,12 +1,17 @@
 import { IUser } from './../../models/user.model';
-import { dataUser } from './../actions/user.actions';
+import { currentUser } from './../actions/user.actions';
 import { createReducer, on } from '@ngrx/store';
-export const initialState:IUser[]=[];
+const userFromLS = localStorage.getItem('user');
+const localID = JSON.parse(localStorage.getItem('id')!);
+
+export const initialState = userFromLS ? JSON.parse(userFromLS) : [];
 const _userReducer = createReducer(
   initialState,
-  on(dataUser, (state, { user }) => user)
+  on(currentUser, (state, action) =>
+     state.filter((user: any) => user.id === localID)
+  )
 );
 
-export function userReducer(state: IUser[], action:any) {
-  return _userReducer(state,action);
+export function userReducer(state: any, action: any) {
+  return _userReducer(state, action);
 }

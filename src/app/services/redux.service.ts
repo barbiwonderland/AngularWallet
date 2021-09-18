@@ -1,5 +1,5 @@
 import { IUser } from './../models/user.model';
-import { dataUser } from './../redux/actions/user.actions';
+import { currentUser } from './../redux/actions/user.actions';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
@@ -25,7 +25,7 @@ export class ReduxService {
    * Actualiza los datos del usuario loggeado
    * @param user
    */
-  update(user: IUser[]) {
-    this.store.dispatch(dataUser({ user }));
+  current() {
+    this.store.dispatch(currentUser());
   }
 }

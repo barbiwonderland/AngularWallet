@@ -6,18 +6,18 @@
       Cambiar Cuenta
     </button>
 
-    <div class="welcome">
+    <div class="welcome" *ngFor="let user of actualUser | async">
 
-      <h1 *ngIf="!dolarAccount">Hola <span class="text-capitalize">{{actualUser.info.name  }}</span>, tu saldo en pesos
+      <h1 *ngIf="!dolarAccount">Hola <span class="text-capitalize">{{user.info.name  }}</span>, tu saldo en pesos
         es de
-        {{actualUser.accounts.pesos | currency}}
+        {{user.accounts.pesos | currency}}
       </h1>
-      <h1 *ngIf="dolarAccount">Hola <span class="text-capitalize">{{actualUser.info.name  }}</span>, tu saldo en dolares
+       <h1 *ngIf="dolarAccount">Hola <span class="text-capitalize">{{user.info.name  }}</span>, tu saldo en dolares
         es de
-        {{actualUser.accounts.dolar | currency}}
-      </h1>
-    </div>
-
+        {{user.accounts.dolar | currency}}
+      </h1> 
+     </div>  
+    
     <div class="main-button">
       <button mat-flat-button color="primary" aria-label="Example icon button with a menu icon"
         [routerLink]="['/dashboard/charge/add']">

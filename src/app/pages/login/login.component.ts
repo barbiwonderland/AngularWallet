@@ -1,3 +1,4 @@
+import { ReduxService } from './../../services/redux.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,15 +11,20 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private AuthService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private AuthService: AuthService,
+    private ReduxService: ReduxService
+  ) {
     this.form = this.fb.group({
       password: ['', [Validators.required]],
       usuario: ['', [Validators.required]],
     });
   }
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.ReduxService.current();
+  }
   ingresar() {
     console.log(
       this.AuthService.userExists(
