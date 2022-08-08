@@ -23,7 +23,7 @@ export class TransferComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  displayedColumns: string[] = ['name', 'surname', 'email', 'send'];
+  displayedColumns: string[] = ['name', 'surname',  'send'];
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
