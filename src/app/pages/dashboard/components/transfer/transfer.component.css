@@ -3,6 +3,7 @@ table {
   border-radius: 5px;
   padding: 1%;
   margin-top: 1%;
+  table-layout: fixed;
 }
 .mat-icon.mat-primary {
   display: flex;
@@ -19,10 +20,11 @@ td {
   width: 100%;
 }
 .main {
-  width: 90vw;
+  width: 95vw;
   margin: auto;
   margin-top: 5%;
   justify-content: center;
+  display: table;
 }
 
 .mat-form-field {
@@ -31,11 +33,17 @@ td {
   height: 50px;
   border-radius: 3px;
   display: flex;
-  align-items: center;
+  align-items: end;
 }
+
 th.mat-header-cell {
   font-size: 0.7rem;
+  text-align: center;
+  padding: 0 !important;
 }
-th.mat-header-cell:last-of-type {
+
+td {
+  font-size: 0.7rem;
+  padding: 0 !important;
   text-align: center;
 }
