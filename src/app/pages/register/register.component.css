@@ -1,46 +1,56 @@
 .body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #7F00FF;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #7f00ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #e100ff,
+    #7f00ff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #e100ff,
+    #7f00ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.login {
+  width: 40%;
+  text-align: center;
+  border: rgb(221, 209, 209) solid 1px;
+  padding: 5px;
+  background-color: rgb(248, 246, 246);
+  max-height: 100%;
+}
+.mat-form-field-infix {
+  width: 80% !important;
+}
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  margin: 0 auto;
+  align-items: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.mat-form-field {
+  height: 70px;
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 80%;
+  justify-content: center;
+  margin: auto;
+}
+@media (max-width: 600px) {
   .login {
-    width: 40%;
-    text-align: center;
-    border: rgb(221, 209, 209) solid 1px;
-    padding: 5px;
-    background-color:rgb(248, 246, 246);
-    max-height: 100%;
-
-  
+    width: 80vw;
   }
-  .mat-form-field-infix{
-      width: 80%!important;
-
-   
-  }
-  button{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-  }
-  
-  .center{
-    margin: 0 auto;
-    align-items: center;
-  }
-  form{
-      display: flex;
-      flex-direction: column;
-  }
-  .mat-form-field{
-      height: 70px;
-  }
-  @media (max-width: 600px) {
-    .login{
-      width: 80vw;
-    }
-  }
+}

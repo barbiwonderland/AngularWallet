@@ -18,7 +18,7 @@ td {
   width: 100%;
 }
 .main {
-  width: 100vw;
+  width: 90vw;
   margin: auto;
   margin-top: 3%;
 }
@@ -31,6 +31,6 @@ td {
   display: flex;
   align-items: center;
 }
-th.mat-header-cell{
+th.mat-header-cell {
   font-size: 0.7rem;
 }

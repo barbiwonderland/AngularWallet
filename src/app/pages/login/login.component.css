@@ -3,33 +3,47 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #7F00FF;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                      }
-  .login {
+  background: #7f00ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #e100ff,
+    #7f00ff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #e100ff,
+    #7f00ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.login {
   width: 30%;
   text-align: center;
   border: rgb(221, 209, 209) solid 1px;
   padding: 5px;
-  background-color:rgb(248, 246, 246);
+  background-color: rgb(248, 246, 246);
   height: 80vh;
-
 }
-.mat-form-field-infix{
-    width: 80%!important;
+.mat-form-field-infix {
+  width: 80% !important;
 }
-button{
-  margin:2% 0 2% 0;
+button {
+  margin: 2% 0 2% 0;
   width: 40%;
 }
 
-.center{
+.center {
   margin: 0 auto;
   align-items: center;
 }
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 80%;
+}
 @media (max-width: 600px) {
-  .login{
+  .login {
     width: 80vw;
   }
 }

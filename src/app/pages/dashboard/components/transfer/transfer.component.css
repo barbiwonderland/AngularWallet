@@ -9,7 +9,7 @@ table {
   justify-content: center;
   align-items: center;
   font-size: 30px;
-  margin:auto
+  margin: auto;
 }
 td {
   text-align: left;
@@ -19,9 +19,10 @@ td {
   width: 100%;
 }
 .main {
-  width: 100vw;
+  width: 90vw;
   margin: auto;
   margin-top: 5%;
+  justify-content: center;
 }
 
 .mat-form-field {
@@ -32,9 +33,9 @@ td {
   display: flex;
   align-items: center;
 }
-th.mat-header-cell{
+th.mat-header-cell {
   font-size: 0.7rem;
 }
-th.mat-header-cell:last-of-type{
+th.mat-header-cell:last-of-type {
   text-align: center;
 }
