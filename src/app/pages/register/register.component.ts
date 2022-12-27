@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup;
   listUsers?: any;
+  newArray?: any[];
 
   constructor(
     private fb: FormBuilder,
@@ -48,8 +49,13 @@ export class RegisterComponent implements OnInit {
         dolar: 0,
       },
     };
-    let newArray = [...this.listUsers, userForm];
-    localStorage.setItem('user', JSON.stringify(newArray));
+  
+    if (this.listUsers.length > 0) {
+       this.newArray = [...this.listUsers, userForm];
+    } else {
+        this.newArray = [userForm]
+    }
+    localStorage.setItem('user', JSON.stringify(this.newArray));
     this.router.navigate(['/login']);
   }
 }

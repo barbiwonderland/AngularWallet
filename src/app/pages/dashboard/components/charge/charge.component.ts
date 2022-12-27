@@ -3,7 +3,6 @@ import { userService } from './../../../../services/user.service';
 import { ActivityService } from './../../../../services/activity.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -31,7 +30,6 @@ export class ChargeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<{ count: number }>,
     private router: Router,
     private ActivityService: ActivityService,
     private userService: userService,

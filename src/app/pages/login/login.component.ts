@@ -20,12 +20,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   ingresar() {
-    console.log(
-      this.AuthService.userExists(
-        this.form.value.usuario,
-        this.form.value.password
-      )
-    );
     this.AuthService.userExists(
       this.form.value.usuario,
       this.form.value.password

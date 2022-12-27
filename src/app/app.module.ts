@@ -2,16 +2,13 @@ import { FixedTermComponent } from './pages/dashboard/components/fixed-term/fixe
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './pages/dashboard/dashboard-routing.module';
 import { RouterModule } from '@angular/router';
-import { reducerGroup } from './redux/reducers/reducersGroup';
+
 import { AngularMaterialModule } from './vendor/angular-material/angular-material.module';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -37,11 +34,6 @@ import { ComeBackButtonComponent } from './components/come-back-button/come-back
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ reducerGroup }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
     AngularMaterialModule,
     DashboardModule,
     RouterModule,
